@@ -1,0 +1,9 @@
+path: proxy/maven
+use_cache: true
+# https://docs.gradle.org/current/userguide/declaring_repositories.html
+
+proxies:
+  - name: Maven Center
+    id: maven-center
+    url: https://repo.maven.apache.org/maven2/
+    description: "maven centeral"
