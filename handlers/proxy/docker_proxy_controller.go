@@ -12,20 +12,6 @@ import (
 	"proxynd/helpers"
 )
 
-package proxy
-
-import (
-"github.com/gin-gonic/gin"
-"io"
-"log"
-"net/http"
-"os"
-"path"
-"path/filepath"
-"proxynd/configs"
-"proxynd/helpers"
-)
-
 func DockerProxy(c *gin.Context) {
 	log.Printf("Access proxy docker\n")
 
@@ -53,8 +39,8 @@ func DockerProxy(c *gin.Context) {
 		defer out.Close()
 
 		// Get the data
-		proxy := config.Proxies["docker"]
-		for s, server := range proxy {
+		//proxy := config.Proxies["docker"]
+		for s, server := range config.Proxies {
 			log.Printf("Trying server %d: %s\n", s, server.URL)
 			resp, err := http.Get(helpers.JoinURL(server.URL, imageName, tag))
 			if err != nil {
@@ -82,6 +68,7 @@ func DockerProxy(c *gin.Context) {
 	c.Header("Content-Type", "application/octet-stream")
 	c.File(filefullpath)
 }
+
 /*
 get docker image layer
 GET /v2/<repository>/blobs/<digest> HTTP/1.1
@@ -89,4 +76,4 @@ Host: <registry>
 User-Agent: docker/20.10.7
 Authorization: Bearer <token>
 Accept: application/vnd.docker.distribution.manifest.v2+json
- */
+*/

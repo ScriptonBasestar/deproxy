@@ -56,7 +56,14 @@ volumes:
 
 #### helm
 
-helm repo install proxynd https://github.com/ScriptonBasestar-io/proxynd/releases/download
+https://scriptonbasestar.github.io/proxynd/
+
+helm repo add sb-proxynd https://scriptonbasestar.github.io/proxynd/
+helm install sb-proxynd/proxynd
+
+### Download
+
+https://github.com/ScriptonBasestar/proxynd/releases
 
 ## REF
 

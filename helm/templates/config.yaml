@@ -45,5 +45,22 @@ data:
       - name: spring_snapshots
         id: repo.spring.io-snapshots
         url: https://repo.spring.io/snapshot
-
+  proxynd_npm-proxy.yaml: |-
+    path: proxy/npm
+    use_cache: true
+    proxies:
+      - name: npmjs
+        url: https://registry.npmjs.org/
+  proxynd_pypi-proxy.yaml: |-
+    path: proxy/pypi
+    use_cache: true
+    proxies:
+      - name: pypi
+        url: https://pypi.org/simple
+  proxynd_rubygems-proxy.yaml: |-
+    path: proxy/rubygems
+    use_cache: true
+    proxies:
+      - name: rubygems
+        url: https://rubygems.org/
 

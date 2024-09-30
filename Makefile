@@ -24,4 +24,11 @@ docker-enter:
 	@echo "Entering..."
 	docker exec -it proxynd bash
 
+go-update:
+	go get -u ./...
+
+go-setup:
+	go mod tidy
+	go mod vendor
+
 .PHONY: build
