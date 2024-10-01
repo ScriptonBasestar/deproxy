@@ -19,7 +19,7 @@ func AptProxy(c *gin.Context) {
 	pathOs := c.Param("osType")
 	requestPath := c.Param("requestPath")
 
-	// fixme di
+	// nolint:godox fixme di??
 	storageDir := helpers.GetStorageDir()
 	globalConfig := configs.GlobalConfig{}
 	globalConfig.ReadConfig()
@@ -40,11 +40,15 @@ func AptProxy(c *gin.Context) {
 	filename := filepath.Base(filefullpath)
 	if _, err := os.Stat(filefullpath); os.IsNotExist(err) {
 		dirpath := filepath.Dir(filefullpath)
-		os.MkdirAll(dirpath, os.ModePerm)
+		err = os.MkdirAll(dirpath, os.ModePerm)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
 		out, err := os.Create(filefullpath)
 		if err != nil {
 			panic(err)
-			return
+			//return
 		}
 		defer out.Close()
 
@@ -66,7 +70,7 @@ func AptProxy(c *gin.Context) {
 				return
 			}
 			resp.Body.Close()
-			break
+			//break
 		}
 	}
 

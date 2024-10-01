@@ -35,5 +35,8 @@ func main() {
 	}
 
 	fmt.Println("http://localhost:" + port + "\n")
-	r.Run(":" + port)
+	err := r.Run(":" + port)
+	if err != nil {
+		fmt.Println(err)
+	}
 }

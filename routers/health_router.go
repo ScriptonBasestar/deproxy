@@ -12,7 +12,11 @@ func HealthRouter(r *gin.Engine) {
 	// You can also validate env format using regex
 	StorageDirCheck := checks.NewEnvCheck("STORAGE_DIR")
 	//StorageDirCheck.SetRegexValidator("^(~|/).+")
-	healthcheck.New(r, config.DefaultConfig(), []checks.Check{confDirCheck, StorageDirCheck})
+	err := healthcheck.New(r, config.DefaultConfig(), []checks.Check{confDirCheck, StorageDirCheck})
+	if err != nil {
+		// nolint:godox fixme panic이 맞나?
+		panic(err)
+	}
 
 	//ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	//defer stop()

@@ -18,7 +18,7 @@ func DockerProxy(c *gin.Context) {
 	imageName := c.Param("imageName")
 	tag := c.Param("tag")
 
-	// fixme di
+	// nolint:godox fixme di??
 	storageDir := helpers.GetStorageDir()
 	globalConfig := configs.GlobalConfig{}
 	globalConfig.ReadConfig()
@@ -30,11 +30,16 @@ func DockerProxy(c *gin.Context) {
 	filename := filepath.Base(filefullpath)
 	if _, err := os.Stat(filefullpath); os.IsNotExist(err) {
 		dirpath := filepath.Dir(filefullpath)
-		os.MkdirAll(dirpath, os.ModePerm)
+		err = os.MkdirAll(dirpath, os.ModePerm)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
 		out, err := os.Create(filefullpath)
 		if err != nil {
 			panic(err)
-			return
+			//log.Fatal(err)
+			//return
 		}
 		defer out.Close()
 

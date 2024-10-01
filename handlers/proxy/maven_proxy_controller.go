@@ -39,7 +39,7 @@ func MavenProxy(c *gin.Context) {
 
 	requestPath := c.Param("path")
 
-	// fixme di
+	// nolint:godox fixme di??
 	storageDir := helpers.GetStorageDir()
 	globalConfig := configs.GlobalConfig{}
 	globalConfig.ReadConfig()
@@ -61,7 +61,11 @@ func MavenProxy(c *gin.Context) {
 	filename := filepath.Base(filefullpath)
 	if _, err := os.Stat(filefullpath); os.IsNotExist(err) {
 		dirpath := filepath.Dir(filefullpath)
-		os.MkdirAll(dirpath, 0766)
+		err = os.MkdirAll(dirpath, 0766)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
 
 		// Get the data
 		fmt.Println(len(config.Proxies))
@@ -85,8 +89,8 @@ func MavenProxy(c *gin.Context) {
 			}
 			resp.Body.Close()
 			responseContent = bytes
-			// FIXME ???? ai코드??
-			break
+			// nolint:godox // FIXME ???? ai코드??
+			//break
 		}
 	} else {
 		bytes, _ := os.ReadFile(filefullpath)

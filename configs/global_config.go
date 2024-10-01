@@ -6,7 +6,7 @@ import (
 )
 
 type Cache struct {
-	TTL int `yaml:"ttl,omitempty" default:36000`
+	TTL int `yaml:"ttl,omitempty"`
 }
 
 type GlobalConfig struct {

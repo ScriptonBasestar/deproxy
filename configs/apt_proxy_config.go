@@ -12,7 +12,7 @@ type AptProxy struct {
 
 type AptProxyConfig struct {
 	Path      string                `json:"path,omitempty"`
-	UserCache bool                  `json:"user_cache,omitempty" default:false`
+	UserCache bool                  `json:"user_cache,omitempty"`
 	Proxies   map[string][]AptProxy `json:"proxies"`
 }
 
