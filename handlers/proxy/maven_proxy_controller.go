@@ -85,6 +85,7 @@ func MavenProxy(c *gin.Context) {
 			}
 			resp.Body.Close()
 			responseContent = bytes
+			// FIXME ???? ai코드??
 			break
 		}
 	} else {

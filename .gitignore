@@ -1,9 +1,13 @@
-.idea
+# ide
+.idea/
+
+# dev
 .env
 
-# go
-vendor/
+# build
+build/
 /main
+/proxynd
 
 # test
 tmp/
@@ -13,3 +17,8 @@ tmpconf/
 *-test.yaml
 *-test.yml
 *-test.json
+
+# dependencies
+node_modules/
+vendor/
+dist/

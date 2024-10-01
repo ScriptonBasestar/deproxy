@@ -41,14 +41,14 @@ func DockerProxy(c *gin.Context) {
 		// Get the data
 		//proxy := config.Proxies["docker"]
 		for s, server := range config.Proxies {
-			log.Printf("Trying server %d: %s\n", s, server.URL)
-			resp, err := http.Get(helpers.JoinURL(server.URL, imageName, tag))
+			log.Printf("Trying server %d: %s\n", s, server.Url)
+			resp, err := http.Get(helpers.JoinURL(server.Url, imageName, tag))
 			if err != nil {
 				log.Fatal(err)
 				return
 			}
 			if resp.StatusCode != http.StatusOK {
-				log.Printf("Server %s returned status %d\n", server.URL, resp.StatusCode)
+				log.Printf("Server %s returned status %d\n", server.Url, resp.StatusCode)
 				continue
 			}
 			// Write the body to file
