@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"path/filepath"
@@ -56,7 +57,12 @@ func AptProxy(c *gin.Context) {
 		proxy := config.Proxies[pathOs]
 		for s, server := range proxy {
 			fmt.Printf("for moon %d\n", s)
-			resp, err := http.Get(helpers.JoinURL(server.URL, requestPath))
+			result, err := url.JoinPath(server.URL, requestPath)
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			resp, err := http.Get(result)
 			if err != nil {
 				log.Fatal(err)
 				return

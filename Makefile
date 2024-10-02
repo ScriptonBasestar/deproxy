@@ -14,6 +14,7 @@ setup:
 	mkdir -p ~/tmp/config
 	mkdir -p ~/tmp/storage
 	cp -r sample-conf/* ~/tmp/config/.
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.61.0
 
 docker-build:
 	@echo "Building..."

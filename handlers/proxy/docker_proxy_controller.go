@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"path/filepath"
@@ -41,13 +42,22 @@ func DockerProxy(c *gin.Context) {
 			//log.Fatal(err)
 			//return
 		}
-		defer out.Close()
+		defer func() {
+			if err := out.Close(); err != nil {
+				log.Printf("Error closing file: %v", err)
+			}
+		}()
 
 		// Get the data
 		//proxy := config.Proxies["docker"]
 		for s, server := range config.Proxies {
 			log.Printf("Trying server %d: %s\n", s, server.Url)
-			resp, err := http.Get(helpers.JoinURL(server.Url, imageName, tag))
+			result, err := url.JoinPath(server.Url, imageName, tag)
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			resp, err := http.Get(result)
 			if err != nil {
 				log.Fatal(err)
 				return
@@ -62,7 +72,11 @@ func DockerProxy(c *gin.Context) {
 				log.Fatal(err)
 				return
 			}
-			resp.Body.Close()
+			err = resp.Body.Close()
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
 			break
 		}
 	}

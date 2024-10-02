@@ -13,3 +13,21 @@ mirrors:
       url: http://ftp.debian.org/debian
     kakao:
       url: http://mirror.kakao.com/debian
+  parrot:
+    official:
+      url: http://deb.parrot.sh/parrot
+    kakao:
+      url: http://mirror.kakao.com/parrot
+  linuxmint:
+    official:
+      url: http://packages.linuxmint.com
+    kakao:
+      url: http://mirror.kakao.com/linuxmint
+  kali:
+    official:
+      url: http://http.kali.org/kali
+  raspbian:
+    official:
+      url: http://archive.raspbian.org/raspbian
+    kakao:
+      url: http://mirror.kakao.com/raspbian

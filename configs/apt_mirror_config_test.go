@@ -14,5 +14,7 @@ func TestAptMirrorConfig_ReadConfig(t *testing.T) {
 	cfg.ReadConfig()
 	fmt.Println(cfg)
 	assert.Equal(t, cfg.Path, "mirror/apt")
-	fmt.Println(helpers.ToStringYaml(cfg))
+	assert.Equal(t, len(cfg.Mirrors.Ubuntu), 2)
+	assert.Equal(t, len(cfg.Mirrors.Debian), 2)
+	fmt.Println(helpers.YamlToString(cfg))
 }

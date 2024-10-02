@@ -4,10 +4,11 @@
 # dev
 .env
 
-# build
+# build & generated
 build/
 /main
 /proxynd
+/coverage.out
 
 # test
 tmp/

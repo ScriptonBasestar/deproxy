@@ -16,7 +16,7 @@ func TestMavenConfig_MavenProxy(t *testing.T) {
 	cfg.ReadConfig()
 	//fmt.Println(cfg)
 	assert.Equal(t, cfg.Path, "proxy/maven")
-	fmt.Println(helpers.ToStringYaml(cfg))
+	fmt.Println(helpers.YamlToString(cfg))
 }
 
 func TestYamlMake(t *testing.T) {
@@ -62,7 +62,7 @@ func TestYamlMake(t *testing.T) {
 }
 
 func TestYaml(t *testing.T) {
-	yamlFile, err := os.ReadFile("../configs/maven-proxy.yaml")
+	yamlFile, err := os.ReadFile("../sample-conf/maven-proxy.yaml")
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 	}
@@ -70,7 +70,8 @@ func TestYaml(t *testing.T) {
 	mavenConfig := MavenProxyConfig{
 		Proxies: []MavenProxyServer{},
 	}
-	err = yaml.Unmarshal(yamlFile, mavenConfig)
+	err = yaml.Unmarshal(yamlFile, &mavenConfig)
+	//fmt.Println(helpers.YamlToString(mavenConfig))
 	if err != nil {
 		log.Fatalf("Unmarshal: %v", err)
 	}

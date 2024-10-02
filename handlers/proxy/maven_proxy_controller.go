@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path"
 	"path/filepath"
@@ -72,7 +73,12 @@ func MavenProxy(c *gin.Context) {
 
 		for s, server := range config.Proxies {
 			fmt.Printf("for moon %d\n", s)
-			resp, err := http.Get(helpers.JoinURL(server.Url, requestPath))
+			result, err := url.JoinPath(server.Url, requestPath)
+			if err != nil {
+				log.Fatal(err)
+				return
+			}
+			resp, err := http.Get(result)
 			if err != nil {
 				log.Fatal(err)
 				return
